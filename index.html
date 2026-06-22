@@ -3,11 +3,142 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pixel Party</title>
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <title>Island Arcade</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <header class="topbar">
+      <a class="brand" href="#home" aria-label="Island Arcade home">
+        <span class="brand-mark">IA</span>
+        <span>Island Arcade</span>
+      </a>
+      <nav class="nav-links" aria-label="Game navigation">
+        <a href="#survivor">Survivor.io</a>
+        <a href="#sorter">Color Sorter</a>
+        <a href="#escape">Arrow Escape</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="home" class="screen home-screen active" aria-labelledby="home-title">
+        <div class="hero">
+          <div class="hero-art" aria-hidden="true">
+            <canvas id="home-art" width="900" height="430"></canvas>
+          </div>
+          <div class="hero-copy">
+            <p class="eyebrow">Fast games for free periods</p>
+            <h1 id="home-title">Survive the island, sort the chaos, dodge the arrows.</h1>
+            <p>
+              Three quick browser games built for a school Chromebook: exciting enough to grab
+              attention, short enough to jump out when the bell rings.
+            </p>
+          </div>
+        </div>
+
+        <div class="game-grid" aria-label="Choose a game">
+          <a class="game-card survivor-card" href="#survivor">
+            <canvas class="card-canvas" width="360" height="190" data-preview="survivor"></canvas>
+            <span class="game-type">Action survival</span>
+            <h2>Survivor.io</h2>
+            <p>Gather driftwood, build shelter, fight night monsters, and hold out for rescue.</p>
+            <span class="play-link">Play</span>
+          </a>
+
+          <a class="game-card sorter-card" href="#sorter">
+            <canvas class="card-canvas" width="360" height="190" data-preview="sorter"></canvas>
+            <span class="game-type">Puzzle</span>
+            <h2>Color Sorter</h2>
+            <p>Move stacked colors between bottles until every bottle is clean and complete.</p>
+            <span class="play-link">Play</span>
+          </a>
+
+          <a class="game-card escape-card" href="#escape">
+            <canvas class="card-canvas" width="360" height="190" data-preview="escape"></canvas>
+            <span class="game-type">Arcade dodge</span>
+            <h2>Arrow Escape</h2>
+            <p>Slip through arrow storms, chain near misses, and survive longer each run.</p>
+            <span class="play-link">Play</span>
+          </a>
+        </div>
+      </section>
+
+      <section id="survivor" class="screen game-screen" aria-labelledby="survivor-title">
+        <div class="game-layout">
+          <aside class="game-panel">
+            <a class="back-link" href="#home">Home</a>
+            <p class="eyebrow">Island night run</p>
+            <h1 id="survivor-title">Survivor.io</h1>
+            <p>Move with WASD or arrow keys. Collect supplies, keep the shelter alive, and survive until rescue arrives.</p>
+            <div class="stats">
+              <span>Time <strong id="survivor-time">0:00</strong></span>
+              <span>Health <strong id="survivor-health">100</strong></span>
+              <span>Shelter <strong id="survivor-shelter">0%</strong></span>
+              <span>Supplies <strong id="survivor-supplies">0</strong></span>
+            </div>
+            <button class="primary-button" id="survivor-start">Start Run</button>
+          </aside>
+          <div class="canvas-frame">
+            <canvas id="survivor-canvas" width="880" height="560" aria-label="Survivor.io game"></canvas>
+            <div class="overlay" id="survivor-overlay">
+              <h2>Build before night falls.</h2>
+              <p>Collect supplies in daylight. Monsters come harder after sunset.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sorter" class="screen game-screen" aria-labelledby="sorter-title">
+        <div class="game-layout">
+          <aside class="game-panel">
+            <a class="back-link" href="#home">Home</a>
+            <p class="eyebrow">Color puzzle</p>
+            <h1 id="sorter-title">Color Sorter</h1>
+            <p>Click a bottle, then click another bottle to pour. Match each bottle into one color.</p>
+            <div class="stats">
+              <span>Level <strong id="sorter-level">1</strong></span>
+              <span>Moves <strong id="sorter-moves">0</strong></span>
+              <span>Best <strong id="sorter-best">--</strong></span>
+            </div>
+            <div class="button-row">
+              <button class="primary-button" id="sorter-new">New Level</button>
+              <button class="secondary-button" id="sorter-undo">Undo</button>
+            </div>
+          </aside>
+          <div class="canvas-frame">
+            <canvas id="sorter-canvas" width="880" height="560" aria-label="Color Sorter game"></canvas>
+            <div class="overlay hidden" id="sorter-overlay">
+              <h2>Clean sort.</h2>
+              <p>Nice work. Tap New Level for a tougher mix.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="escape" class="screen game-screen" aria-labelledby="escape-title">
+        <div class="game-layout">
+          <aside class="game-panel">
+            <a class="back-link" href="#home">Home</a>
+            <p class="eyebrow">2D dodge arena</p>
+            <h1 id="escape-title">Arrow Escape</h1>
+            <p>Use WASD or arrows. Press Space to dash through danger when the arrows close in.</p>
+            <div class="stats">
+              <span>Score <strong id="escape-score">0</strong></span>
+              <span>Time <strong id="escape-time">0:00</strong></span>
+              <span>Near misses <strong id="escape-misses">0</strong></span>
+            </div>
+            <button class="primary-button" id="escape-start">Start Dodge</button>
+          </aside>
+          <div class="canvas-frame">
+            <canvas id="escape-canvas" width="880" height="560" aria-label="Arrow Escape game"></canvas>
+            <div class="overlay" id="escape-overlay">
+              <h2>Stay sharp.</h2>
+              <p>Close calls score more, but one hit ends the run.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
   </body>
 </html>
